@@ -1,17 +1,18 @@
-import express, { Application } from 'express';
+import express, { Express, Application } from 'express';
 // import cors from 'cors'
 import morgan from 'morgan';
 import session from "express-session";
 import MongoStore from "connect-mongo";
 
 import { notFound, errorHandler } from '../middleware/errorHandler';
-// import { requestLogger } from '../middleware/requestLogger';
+import { requestLogger } from '../middleware/requestLogger';
 import db from '../db';
 import routes from '../routes';
+import swaggerDocs from '../docs/swagger';
 
 class Server {
-  private readonly app: Application;
-  private readonly port: string;
+  app: Application;
+  port: string;
 
   constructor () {
     this.app = express();
@@ -21,6 +22,7 @@ class Server {
     this.dbConnection().then(() => {
       this.middlewares();
       this.session();
+      this.documentation();
       this.routes();
       this.errorMiddlewares();
     }).catch(err => console.error(err))
@@ -41,7 +43,7 @@ class Server {
     // JSON
     this.app.use(express.json());
     // LOGS
-    // this.app.use(requestLogger); // <-- homemade
+    this.app.use(requestLogger); // <-- handmade
     this.app.use(morgan('dev')); // other options: 'common' | 'combined' | 'tiny'
   }
 
@@ -67,6 +69,10 @@ class Server {
 
   routes (): void {
     this.app.use('/api', routes);
+  }
+
+  documentation (): void {
+    swaggerDocs(this.app as Express, this.port);
   }
 
   listen (): void {

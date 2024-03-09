@@ -2,6 +2,8 @@ import Task from '../models/Task';
 import { ITask } from '../../types'
 
 export const taskService = {
+
+  // Get tasks from DB
   getTasks: async (): Promise<ITask[]> => {
     try {
       const tasks = await Task.find({}).exec();
@@ -11,6 +13,8 @@ export const taskService = {
       throw error;
     }
   },
+
+  // Add a task to DB
   saveTask: async (body: ITask): Promise<ITask> => {
     try {
       const task = new Task(body);
@@ -21,6 +25,8 @@ export const taskService = {
       throw error;
     }
   },
+
+  // Edit a task from DB
   putTask: async (taskId: string, body: ITask): Promise<ITask> => {
     try {
       const task = await Task.findByIdAndUpdate(taskId, body, { new: true });
@@ -30,6 +36,8 @@ export const taskService = {
       throw error
     }
   },
+
+  // Delete a specific task from DB
   deleteTask: async (taskId: string): Promise<ITask> => {
     try {
       const task = await Task.findByIdAndDelete(taskId);

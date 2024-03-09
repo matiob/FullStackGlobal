@@ -3,13 +3,13 @@ import createHttpError from "http-errors";
 import { userService } from "../services/user.service";
 
 // GET User
-export const getUser = (async (
+export const getUserById = (async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const user = await userService.getUserById(req.session.userId!);
+    const user = await userService.getUserById(req.session.userId!); // TODO
     return user != null ? res.status(200).send(user) : res.sendStatus(401);
   } catch (error) {
     next(error);
@@ -26,6 +26,15 @@ export const signUp = (async (
   const {userName, email, password } = req.body;
   if (!userName || !email || !password) {
     throw createHttpError(400, "Parameters missing");
+
+    /* res.status(400)
+      .send({
+        status: "FAILED",
+        data: {
+          error:
+            "One of the following keys is missing or is empty in request body: 'userName', 'email', 'password'",
+        },
+      }); */
   }
 
   try {

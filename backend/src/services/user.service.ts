@@ -3,6 +3,8 @@ import User from "../models/User";
 import { IUser, SignUpBody } from "../../types";
 
 export const userService = {
+
+  // Get user from DB to keep session open
   getUserById: async (userId: string): Promise<IUser | null> => {
     try {
       const user = await User.findById(userId).select("+email").exec();
@@ -15,6 +17,8 @@ export const userService = {
       throw error;
     }
   },
+
+  // Find user from DB by username
   getUserByName: async (userName: string): Promise<IUser | null> => {
     try {
       const user = await User.findOne({ username: userName })
@@ -30,6 +34,8 @@ export const userService = {
       throw error;
     }
   },
+
+  // Find user from DB by user email
   getUserByEmail: async (email: string): Promise<IUser | null> => {
     try {
       const user = await User.findOne({ email: email }).exec();
@@ -42,6 +48,8 @@ export const userService = {
       throw error;
     }
   },
+
+  // Add a user to DB
   saveUser: async (data: SignUpBody): Promise<IUser> => {
     try {
       const { userName, email, password } = data;
@@ -56,6 +64,8 @@ export const userService = {
       throw error;
     }
   },
+
+  // Compare given password to user password from DB
   comparePassword: async (
     passwordRaw: string,
     userPassword: string

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const connectionString: string = process.env.MONGO_CNN_STR!;
 
+// Connection to Mongo Atlas
 const db = async (): Promise<void> => {
   try {
     if (!connectionString) {
