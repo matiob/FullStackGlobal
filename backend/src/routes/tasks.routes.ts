@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getTasks, postTask, editTask, deleteTask} from '../controllers/task.controller';
+import { getTasks, getTask, getTasksByTitle, postTask, editTask, deleteTask} from '../controllers/task.controller';
 
 const router = Router();
 
@@ -38,6 +38,49 @@ const router = Router();
  *         description: Internal Server Error
  */
 router.get('/', getTasks);
+
+/**
+ * @swagger
+ * /api/tasks/title:
+ *  get:
+ *     summary: Get tasks by title
+ *     description: Get tasks by title
+ *     parameters:
+ *       - in: query
+ *         name: taskTitle
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Task title
+ *     responses:
+ *       '200':
+ *         description: Success
+ *       '500':
+ *         description: Internal Server Error
+ */
+// router.get('/title/:taskTitle', getTasksByTitle);
+router.get('/title', getTasksByTitle);
+
+/**
+ * @swagger
+ * /api/tasks/{taskId}:
+ *  get:
+ *     summary: Get task detail
+ *     description: Get task detail
+ *      parameters:
+ *       - in: path
+ *         name: taskId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Task id
+ *     responses:
+ *      200:
+ *         description: Success
+ *      500:
+ *         description: Internal Server Error
+ */
+router.get('/:taskId', getTask);
 
 /**
  * @swagger

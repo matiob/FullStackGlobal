@@ -1,13 +1,13 @@
 import bcrypt from "bcrypt";
 import User from "../models/User";
-import { IUser, SignUpBody } from "../../types";
+import { IUser } from "../../types";
 
 export const userService = {
 
   // Get user from DB to keep session open
-  getUserById: async (userId: string): Promise<IUser | null> => {
+  getUserById: async (userId: Object): Promise<IUser | null> => {
     try {
-      const user = await User.findById(userId).select("+email").exec();
+      const user = await User.findById(userId).select("+email");
       return user;
     } catch (error) {
       console.error(
@@ -50,11 +50,11 @@ export const userService = {
   },
 
   // Add a user to DB
-  saveUser: async (data: SignUpBody): Promise<IUser> => {
+  saveUser: async (data: IUser): Promise<IUser> => {
     try {
-      const { userName, email, password } = data;
+      const { username, email, password } = data;
       const user = await User.create({
-        username: userName,
+        username,
         email,
         password,
       });

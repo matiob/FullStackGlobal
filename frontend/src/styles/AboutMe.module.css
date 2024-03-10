@@ -1,0 +1,107 @@
+/* SECTIONS */
+
+section {
+    padding-top: 4vh;
+    height: 96vh;
+    margin: 0 10rem;
+    box-sizing: border-box;
+    min-height: fit-content;
+}
+
+.section-container {
+    display: flex;
+}
+
+/* PROFILE SECTION */
+
+.profile {
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+    height: 80vh;
+}
+
+.picCntainer {
+    display: flex;
+    height: 100px;
+    width: 100px;
+    margin: auto 0;
+}
+
+.profilePic {
+    border-radius: 50%;
+}
+
+.profileText {
+    align-self: center;
+    text-align: center;
+}
+
+.profileText p {
+    font-weight: 600;
+}
+
+.textP1 {
+    text-align: center;
+}
+
+.textP2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-size: 3rem;
+    text-align: center;
+}
+
+/* ICONS */
+
+.icon {
+    cursor: pointer;
+    height: 2rem;
+}
+
+/* BUTTONS */
+
+.btnContainer {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.btn {
+    font-weight: 600;
+    transition: all 300ms ease;
+    padding: 1rem;
+    width: 8rem;
+    border-radius: 2rem;
+}
+
+.btnColor1,
+.btnColor2 {
+    border: rgb(53, 53, 53) 0.1rem solid;
+}
+
+.btnColor1:hover,
+.btnColor2:hover {
+    cursor: pointer;
+}
+
+.btnColor1,
+.btnColor2:hover {
+    background: rgb(53, 53, 53);
+    color: white;
+}
+
+.btnColor1:hover {
+    background: rgb(0, 0, 0);
+}
+
+.btnColor2 {
+    background: none;
+}
+
+.btnColor2:hover {
+    border: rgb(255, 255, 255) 0.1rem solid;
+}

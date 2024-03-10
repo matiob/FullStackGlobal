@@ -2,21 +2,10 @@ import {
   Request,
   Response,
   NextFunction,
-  RequestHandler,
   ErrorRequestHandler,
 } from "express";
 import { Error as MongooseError } from 'mongoose';
 import { isHttpError } from "http-errors";
-
-export const notFound: RequestHandler = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const error = new Error(`⛔ [ERROR] Not Found - ${req.originalUrl}`);
-  res.status(404);
-  next(error);
-};
 
 export const errorHandler: ErrorRequestHandler = (
   err: any,
@@ -25,14 +14,14 @@ export const errorHandler: ErrorRequestHandler = (
   _next: NextFunction
 ) => {
   // Default error
-  let statusCode = res.statusCode === 200 ? 500 : res.statusCode;
+  let statusCode = 500;
   let errorName = 'Server error';
   let errorMessage = "An unknown error occurred";
 
   // Error type
-  if (err instanceof MongooseError.ValidationError) {
+  if (err instanceof MongooseError) {
     statusCode = 400;
-    errorName = 'ValidationError';
+    errorName = 'DataBaseError';
     errorMessage = err.message;
   }
   if (isHttpError(err)) {
@@ -40,11 +29,6 @@ export const errorHandler: ErrorRequestHandler = (
     errorName = err.name;
     errorMessage = err.message;
   }
-
-  /* err.name === 'ValidationError' && (statusCode = 400);
-  err.name === 'BadRequestError' && (statusCode = 400);
-  err.name === 'UnauthorizedError' && (statusCode = 401);
-  err.name === 'ForbiddenError' && (statusCode = 403); */
 
   console.error(err);
   res.status(statusCode);

@@ -4,8 +4,8 @@ import morgan from 'morgan';
 import session from "express-session";
 import MongoStore from "connect-mongo";
 
-import { notFound, errorHandler } from '../middleware/errorHandler';
-import { requestLogger } from '../middleware/requestLogger';
+import { errorHandler } from '../middleware/errorHandler';
+// import { requestLogger } from '../middleware/requestLogger';
 import db from '../db';
 import routes from '../routes';
 import swaggerDocs from '../docs/swagger';
@@ -38,12 +38,10 @@ class Server {
   }
 
   middlewares (): void {
-    // CORS
-    // this.app.use(cors());
     // JSON
     this.app.use(express.json());
     // LOGS
-    this.app.use(requestLogger); // <-- handmade
+    // this.app.use(requestLogger); // <-- handmade
     this.app.use(morgan('dev')); // other options: 'common' | 'combined' | 'tiny'
   }
 
@@ -63,7 +61,6 @@ class Server {
   }
 
   errorMiddlewares (): void {
-    this.app.use(notFound);
     this.app.use(errorHandler);
   }
 

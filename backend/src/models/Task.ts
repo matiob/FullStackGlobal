@@ -2,11 +2,12 @@ import { /* InferSchemaType, */ Schema, model, Model } from "mongoose";
 import { ITask } from '../../types';
 
 const taskSchema: Schema = new Schema({
+  userId: { type: Schema.Types.ObjectId, required: true },
   title: { type: String, required: true},
   content: { type: String, required: true },
+  // isDone: { type: Boolean, required: true },
+  // isDeleted: { type: Boolean, required: true },
 }, { timestamps: true });
-
-// type Task = InferSchemaType<typeof taskSchema>;
 
 const TaskModel: Model<ITask> = model<ITask>("Task", taskSchema);
 

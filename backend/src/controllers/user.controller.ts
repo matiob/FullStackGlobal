@@ -2,18 +2,18 @@ import { Request, Response, RequestHandler, NextFunction } from "express";
 import createHttpError from "http-errors";
 import { userService } from "../services/user.service";
 
-// GET User
+// GET Authenticated User
 export const getUserById = (async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const user = await userService.getUserById(req.session.userId!); // TODO
-    return user != null ? res.status(200).send(user) : res.sendStatus(401);
+    const user = await userService.getUserById(req.session.userId!);
+    res.status(200).send(user);
   } catch (error) {
+    console.error((error as Error).stack);
     next(error);
-    return;
   }
 }) as RequestHandler;
 
@@ -23,22 +23,13 @@ export const signUp = (async (
   res: Response,
   next: NextFunction
 ) => {
-  const {userName, email, password } = req.body;
-  if (!userName || !email || !password) {
+  const {username, email, password } = req.body;
+  if (!username || !email || !password) {
     throw createHttpError(400, "Parameters missing");
-
-    /* res.status(400)
-      .send({
-        status: "FAILED",
-        data: {
-          error:
-            "One of the following keys is missing or is empty in request body: 'userName', 'email', 'password'",
-        },
-      }); */
   }
 
   try {
-    const existingUserName = await userService.getUserByName(userName);
+    const existingUserName = await userService.getUserByName(username);
     if (existingUserName) {
       throw createHttpError(
         409,
@@ -69,14 +60,14 @@ export const login = (async (
   res: Response,
   next: NextFunction
 ) => {
-  const userName = req.body.username;
+  const username = req.body.username;
   const password = req.body.password;
-  if (!userName || !password) {
+  if (!username || !password) {
     throw createHttpError(400, "Parameters missing");
   }
 
   try {
-    const user = await userService.getUserByName(userName);
+    const user = await userService.getUserByName(username);
     if (!user) throw createHttpError(401, "Invalid credentials");
     const passwordMatch = await userService.comparePassword(password, user.password);
     if (!passwordMatch) throw createHttpError(401, "Invalid credentials");
@@ -94,5 +85,5 @@ export const logout = (async (
   res: Response,
   next: NextFunction
 ) => {
-  req.session.destroy((error) => (error ? next(error) : res.sendStatus(200)));
+  return req.session.destroy((error) => (error ? next(error) : res.sendStatus(200)));
 }) as RequestHandler;

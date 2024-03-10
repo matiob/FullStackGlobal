@@ -1,22 +1,20 @@
-import { Document } from "mongoose";
+import mongoose, { Document } from "mongoose";
 
 interface ITask extends Document {
+  userId: mongoose.Types.ObjectId;
   title: string;
   content: string;
+  // isDone: boolean;
+  // isDeleted: boolean;
 }
 interface IUser extends Document {
-  userName: string;
+  username: string;
   email: string;
   password: string;
 }
-interface SignUpBody {
-  userName?: string,
-  email?: string,
-  password?: string,
-}
 
-declare module 'express-session' {
+declare module "express-session" {
   interface SessionData {
-    userId?: string;
+    userId?: mongoose.Types.ObjectId;
   }
 }
