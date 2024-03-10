@@ -7,6 +7,7 @@ import TextInputField from "./TextInputField";
 import styleUtils from "../styles/utils.module.css";
 import { useState } from 'react';
 import { ConflictError } from "../utils/errorHandler";
+import styles from '../styles/Button.module.css';
 
 interface SignUpModalProps {
     onDismiss: () => void,
@@ -78,7 +79,7 @@ const SignUpModal = ({ onDismiss, onSignUpSuccessful }: SignUpModalProps) => {
                     <Button
                         type="submit"
                         disabled={isSubmitting}
-                        className={styleUtils.width100}>
+                        className={`${styleUtils.width100} ${styles.buttonBackground}`}>
                         Sign Up
                     </Button>
                 </Form>

@@ -24,7 +24,6 @@ export const userService = {
       const user = await User.findOne({ username: userName })
         .select("+password +email")
         .exec();
-      // User.findOne({ username: username }).exec(); // para el signUp
       return user;
     } catch (error) {
       console.error(

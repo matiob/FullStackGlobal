@@ -5,7 +5,7 @@ import { ITask } from '../../types';
 export const taskService = {
 
   // Get tasks from DB
-  getTasks: async (authenticatedUserId: any): Promise<ITask[]> => {
+  getTasks: async (authenticatedUserId: mongoose.Types.ObjectId): Promise<ITask[]> => {
     try {
       const tasks = await Task.find({ userId: authenticatedUserId });
       return tasks;
@@ -27,7 +27,7 @@ export const taskService = {
   },
 
   // Get a task by name from DB -- FILTER
-  getTaskByTitle: async (taskTitle: string, authenticatedUserId: any): Promise<ITask[]> => {
+  getTaskByTitle: async (taskTitle: string, authenticatedUserId: mongoose.Types.ObjectId): Promise<ITask[]> => {
     try {
       // Mongo filter -> const tasks = await Task.find({ userId: authenticatedUserId, title: taskTitle });
       const tasks = await Task.find({ userId: authenticatedUserId });
@@ -39,11 +39,14 @@ export const taskService = {
   },
 
   // Add a task to DB
-  saveTask: async (authenticatedUserId: any, body: ITask): Promise<ITask> => {
+  saveTask: async (authenticatedUserId: mongoose.Types.ObjectId, body: ITask): Promise<ITask> => {
     try {
+      // Set user ID to task
       body.userId = authenticatedUserId;
+      
       const task = new Task(body);
       await task.save();
+      
       return task;
     } catch (error) {
       console.error('[taskService-saveTask] ERROR->', (error as Error).message);
@@ -52,10 +55,13 @@ export const taskService = {
   },
 
   // Edit a task from DB
-  putTask: async (taskId: string, body: ITask, authenticatedUserId: any): Promise<ITask | null> => {
+  putTask: async (taskId: string, body: ITask, authenticatedUserId: mongoose.Types.ObjectId): Promise<ITask | null> => {
     try {
+      // Set user ID to task
       body.userId = authenticatedUserId;
+      
       const task = await Task.findByIdAndUpdate(taskId, body, { new: true });
+      
       return task;
     } catch (error) {
       console.error('[taskService-putTask] ERROR->', (error as Error).message)
@@ -63,7 +69,7 @@ export const taskService = {
     }
   },
 
-  // TODO: Update a task from DB
+  // TODO: Update a task as isDone from DB
   /* doneTask: async (taskId: string, body: ITask, authenticatedUserId: any): Promise<ITask | null> => {
     try {
       body.userId = authenticatedUserId;

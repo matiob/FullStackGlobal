@@ -4,6 +4,7 @@ import { FaPlus } from "react-icons/fa";
 import { Task as TaskModel } from "../models/task";
 import * as taskService from "../services/tasks.service";
 import styles from "../styles/TasksPage.module.css";
+import buttonStyles from '../styles/Button.module.css';
 import styleUtils from "../styles/utils.module.css";
 import AddEditTaskDialog from "./AddEditTaskDialog";
 import Task from "./Task";
@@ -98,7 +99,7 @@ const TasksPageLoggedInView = () => {
   return (
     <>
       <Button
-        className={`mb-4 ${styleUtils.blockCenter} ${styleUtils.flexCenter}`}
+        className={`mb-4 ${styleUtils.blockCenter} ${styleUtils.flexCenter} ${buttonStyles.buttonBackground}`}
         onClick={() => setShowAddTaskDialog(true)}
       >
         <FaPlus />
@@ -114,7 +115,7 @@ const TasksPageLoggedInView = () => {
                 value={taskTitleSearch}
                 onChange={(e) => setTaskTitleSearch(e.target.value)}
             />
-            <Button variant="outline-primary" size="sm" onClick={handleSearch}>
+            <Button variant="outline-primary" size="sm" onClick={handleSearch} >
             Filter
           </Button>
       </div>

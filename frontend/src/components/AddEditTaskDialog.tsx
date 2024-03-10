@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Task, TaskInput } from "../models/task";
 import * as TasksApi from "../services/tasks.service";
 import TextInputField from "./TextInputField";
+import styles from '../styles/Button.module.css';
 
 interface AddEditTaskDialogProps {
     taskToEdit?: Task,
@@ -69,6 +70,7 @@ const AddEditTaskDialog = ({ taskToEdit, onDismiss, onTaskSaved }: AddEditTaskDi
 
             <Modal.Footer>
                 <Button
+                    className={styles.buttonBackground}
                     type="submit"
                     form="addEditTaskForm"
                     disabled={isSubmitting}

@@ -7,6 +7,7 @@ import TextInputField from "./TextInputField";
 import styleUtils from "../styles/utils.module.css";
 import { useState } from 'react';
 import { UnauthorizedError } from "../utils/errorHandler";
+import styles from '../styles/Button.module.css';
 
 interface LoginModalProps {
     onDismiss: () => void,
@@ -69,7 +70,7 @@ const LoginModal = ({ onDismiss, onLoginSuccessful }: LoginModalProps) => {
                     <Button
                         type="submit"
                         disabled={isSubmitting}
-                        className={styleUtils.width100}>
+                        className={`${styleUtils.width100} ${styles.buttonBackground}`}>
                         Log In
                     </Button>
                 </Form>

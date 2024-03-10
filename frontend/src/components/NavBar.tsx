@@ -3,6 +3,7 @@ import { User } from "../models/user";
 import NavBarLoggedInView from "./NavBarLoggedInView";
 import NavBarLoggedOutView from "./NavBarLoggedOutView";
 import { Link } from "react-router-dom";
+import styles from '../styles/NavBar.module.css';
 
 interface NavBarProps {
     loggedInUser: User | null,
@@ -13,7 +14,7 @@ interface NavBarProps {
 
 const NavBar = ({ loggedInUser, onSignUpClicked, onLoginClicked, onLogoutSuccessful }: NavBarProps) => {
     return (
-        <Navbar bg="primary" variant="dark" expand="sm" sticky="top">
+        <Navbar className={styles.background} variant="dark" expand="sm" sticky="top">
             <Container>
                 <Navbar.Brand as={Link} to="/">
                     ToDo App

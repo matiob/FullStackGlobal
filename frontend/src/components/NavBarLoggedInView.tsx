@@ -1,6 +1,7 @@
 import { Button, Navbar } from "react-bootstrap";
 import { User } from "../models/user";
 import { logout } from '../services/user.service';
+import styles from '../styles/Button.module.css';
 
 interface NavBarLoggedInViewProps {
     user: User,
@@ -24,7 +25,7 @@ const NavBarLoggedInView = ({ user, onLogoutSuccessful }: NavBarLoggedInViewProp
             <Navbar.Text className="me-2">
                 Signed in as: {user.username}
             </Navbar.Text>
-            <Button onClick={logOut}>Log out</Button>
+            <Button className={styles.buttonBackground} onClick={logOut}>Log out</Button>
         </>
     );
 }
