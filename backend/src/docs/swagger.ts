@@ -13,7 +13,7 @@ const options: Options = {
       }
   ]
   },
-  apis: ["../routes/*.ts"],
+  apis: ["**/*.ts"],
 };
 
 // Docs in JSON format

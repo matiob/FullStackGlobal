@@ -67,7 +67,7 @@ router.get('/title', getTasksByTitle);
  *  get:
  *     summary: Get task detail
  *     description: Get task detail
- *      parameters:
+ *     parameters:
  *       - in: path
  *         name: taskId
  *         schema:
@@ -75,9 +75,9 @@ router.get('/title', getTasksByTitle);
  *         required: true
  *         description: Task id
  *     responses:
- *      200:
+ *     200:
  *         description: Success
- *      500:
+ *     500:
  *         description: Internal Server Error
  */
 router.get('/:taskId', getTask);
