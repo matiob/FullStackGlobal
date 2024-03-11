@@ -18,7 +18,7 @@ Prueba Técnica: TODO List
 >4. Navigate to `http://localhost:3000/`. The application will automatically reload if you change any of the source files.
 
 >[!TIP]
->To run proyect tests:
+>* To run proyect tests:
 >Open a **cmd**, go to the `./backend` folder and Run `npm run test`
->To see documentation:
+>* To see documentation:
 >Navigate to `http://localhost:5000/api-docs`.
