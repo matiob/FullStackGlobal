@@ -2,7 +2,9 @@ import mongoose from "mongoose";
 import request from "supertest";
 import Server from "../../src/models/Server";
 
-import { Request, Response } from 'express';
+import { Request, Response } from "express";
+
+jest.setTimeout(30000)
 
 // Database connection
 beforeEach(async () => {
@@ -15,26 +17,31 @@ beforeEach(async () => {
 
 // TODO: mock express session
 
-/* beforeEach(() => {
+beforeEach(() => {
   let req: Partial<Request>;
   let res: Partial<Response>;
-  const stringId = '65ece082840b6892bbc16d1f';
+  const stringId = "65ece082840b6892bbc16d1f";
   const objectId = mongoose.Types.ObjectId.createFromHexString(stringId);
   req = {
     session: {
       userId: objectId,
-      id: 'wDCNZH-oA99wIWtFdzPLj2ePW8XI7eYr',
-      cookie: {"originalMaxAge":3600000,"expires":"2024-03-10T22:49:20.918Z","httpOnly":true,"path":"/"},
+      id: "wDCNZH-oA99wIWtFdzPLj2ePW8XI7eYr",
+      cookie: {
+        originalMaxAge: 3600000,
+        expires: "2024-03-10T22:49:20.918Z",
+        httpOnly: true,
+        path: "/",
+      },
       regenerate: jest.fn(),
       destroy: jest.fn(),
-    } as any
+    } as any,
   };
   res = {
     status: jest.fn().mockReturnThis(),
     send: jest.fn(),
   };
   return { req, res };
-}); */
+});
 
 afterEach(async () => {
   try {

@@ -19,4 +19,6 @@ Prueba Técnica: TODO List
 
 >[!TIP]
 >To run proyect tests:
->1. Open a **cmd**, go to the `./backend` folder and Run `npm run test` 
+>Open a **cmd**, go to the `./backend` folder and Run `npm run test`
+>To see documentation:
+>Navigate to `http://localhost:5000/api-docs`.
